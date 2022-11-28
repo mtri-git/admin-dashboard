@@ -1,5 +1,11 @@
-#set up
-yarn --> install
+### Set up
+```bash
+yarn
+```
 
-#Run
-yarn dev --> run at port 5173
+### Run
+```bash
+yarn dev
+```
+
+Run at port 5173
