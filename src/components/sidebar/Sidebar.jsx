@@ -28,7 +28,8 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">Admin Dashboard</span>
+          <img className="w-7 m-auto" src='/puzzle-icon.svg'/>
+          <span className="text-sm font-bold text-[#7451F8]">Dashboard</span>
         </Link>
       </div>
       <hr />
