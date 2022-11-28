@@ -1,5 +1,5 @@
 #set up
+yarn --> install
 
-yarn
-
-yarn dev to run
+#Run
+yarn dev --> run at port 5173
