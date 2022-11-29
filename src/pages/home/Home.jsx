@@ -5,7 +5,7 @@ import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";
 import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import statisticService from "../../services/statisticService";
 
@@ -15,22 +15,17 @@ const Home = () => {
   const [ userNumber, setUserNumber] = useState()
   const [ jobNumber, setJobNumber] = useState()
   const [ applicationNumber, setApplicationJobNumber] = useState()
-
-  useEffect(()=>{
-      statisticService.getAmountAccount().then(res => {setUserNumber(res.data.data)})
-      statisticService.getJobAmount().then(res => {setJobNumber(res.data.data)})
-      statisticService.getApplicationAmount().then(res => {setApplicationJobNumber(res.data.data)})
-  }, [])
-
-  console.log(userNumber);
-
-  useEffect(()=>{
+  useLayoutEffect(()=>{
     const token = localStorage.getItem('login')
     if(!token)
       navigate('login')
-
+    else{
+      statisticService.getAmountAccount().then(res => {setUserNumber(res.data.data)})
+      statisticService.getJobAmount().then(res => {setJobNumber(res.data.data)})
+      statisticService.getApplicationAmount().then(res => {setApplicationJobNumber(res.data.data)})
+    }
   }, [])
-
+  
   return (
     <div className="home">
       {/* <Sidebar /> */}

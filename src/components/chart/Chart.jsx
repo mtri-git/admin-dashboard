@@ -31,9 +31,10 @@ const dataWeek = [
 const Chart = ({ aspect, title}) => {
 
   const [myData, setMyData] = useState(data)
-
+  const token = localStorage.getItem('login')
   useEffect(()=>{
-      statisticService.getDataJoinLastWeek().then(res => setMyData(res.data.data))
+      if(token)
+        statisticService.getDataJoinLastWeek().then(res => setMyData(res?.data?.data))
   }, [])
 
   console.log('chart', myData)
