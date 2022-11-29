@@ -7,6 +7,8 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { useEffect, useState } from "react";
+import statisticService from "../../services/statisticService";
 
 const data = [
   { name: "January", Total: 1200 },
@@ -17,7 +19,25 @@ const data = [
   { name: "June", Total: 1700 },
 ];
 
-const Chart = ({ aspect, title, dataset = data}) => {
+const dataWeek = [
+  { name: "Week 1", Total: 120 },
+  { name: "Week 2", Total: 300 },
+  { name: "Week 3", Total: 800 },
+  { name: "Week 4", Total: 1600 },
+  { name: "Week 5", Total: 900 },
+  { name: "Week 6", Total: 1700 },
+];
+
+const Chart = ({ aspect, title}) => {
+
+  const [myData, setMyData] = useState(data)
+
+  useEffect(()=>{
+      statisticService.getDataJoinLastWeek().then(res => setMyData(res.data.data))
+  }, [])
+
+  console.log('chart', myData)
+
   return (
     <div className="chart">
       <div className="title">{title}</div>
@@ -25,7 +45,7 @@ const Chart = ({ aspect, title, dataset = data}) => {
         <AreaChart
           width={730}
           height={250}
-          data={dataset}
+          data={dataWeek}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <defs>
