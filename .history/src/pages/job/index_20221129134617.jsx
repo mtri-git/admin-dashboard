@@ -12,8 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const DatatableTemplate = () => {
   const {data, error, isError, isLoading, refetch } = useQuery({queryKey: ['jobs'], queryFn: jobService.getAllJob }) 
-  const dataRow = data?.data?.data
-  console.log(data?.data)
+  const dataRow = data?.data?.content
   const activeJobMutation =  useMutation({mutationFn: (id) => jobService.activeJob(id, true), mutationKey: `active-job-${uuidv4()}`,
   refetchQueries: [{ query: 'jobs'}]})
   
