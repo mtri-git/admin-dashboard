@@ -8,7 +8,7 @@ const skillService = {
     getAllSkill(){
         if(!token)
             return null
-        return api.get('api/admin/get-all-extra-info',
+        return api.get('api/admin/get-extra-info',
         {
         headers: {
             'Authorization': `Bearer ${token}`

@@ -8,7 +8,7 @@ const jobService = {
     getAllJob(){
         if(!token)
             return null
-        return api.get('api/admin/get-all-job-by-page?page=0&numOfRecord=5',
+        return api.get('api/admin/get-all-job-post',
         {
         headers: {
             'Authorization': `Bearer ${token}`

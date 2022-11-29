@@ -9,6 +9,8 @@ import {
 } from "recharts";
 import { useEffect, useState } from "react";
 import statisticService from "../../services/statisticService";
+import { useLayoutEffect } from "react";
+import { useQueries, useQuery } from "@tanstack/react-query";
 
 const data = [
   { name: "January", Total: 1200 },
@@ -20,25 +22,33 @@ const data = [
 ];
 
 const dataWeek = [
-  { name: "Week 1", Total: 120 },
-  { name: "Week 2", Total: 300 },
-  { name: "Week 3", Total: 800 },
-  { name: "Week 4", Total: 1600 },
-  { name: "Week 5", Total: 900 },
-  { name: "Week 6", Total: 1700 },
+  { name: "Week 1", Total: 0 },
+  { name: "Week 1", Total: 0 },
+  { name: "Week 2", Total: 0 },
+  { name: "Week 3", Total: 0 },
+  { name: "Week 4", Total: 0 },
+  { name: "Week 5", Total: 0 },
+  { name: "Week 6", Total: 10 },
 ];
 
-const Chart = ({ aspect, title}) => {
+const Chart = ({ aspect, title }) => {
+  const [myData, setMyData] = useState(data);
 
-  const [myData, setMyData] = useState(data)
-  const token = localStorage.getItem('login')
-  useEffect(()=>{
-      if(token)
-        statisticService.getDataJoinLastWeek().then(res => setMyData(res?.data?.data))
-  }, [])
+  const token = localStorage.getItem("login");
 
-  console.log('chart', myData)
+  useEffect(() => {
+    if (token) {
+      statisticService
+        .getDataJoinLastWeek()
+        .then((res) => {
+          const dataTmp = res?.data?.data
+          setMyData(dataTmp.map(dt => ({name: dt.name, Total: dt.total})))
+        });
+      }
+  }, []);
 
+
+  console.log("statte", myData);
   return (
     <div className="chart">
       <div className="title">{title}</div>
@@ -46,7 +56,7 @@ const Chart = ({ aspect, title}) => {
         <AreaChart
           width={730}
           height={250}
-          data={dataWeek}
+          data={myData}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <defs>
