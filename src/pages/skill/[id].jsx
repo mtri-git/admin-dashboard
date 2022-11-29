@@ -7,10 +7,18 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import skillService from "../../services/skillService";
 import { useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const UpdateSkill = () => {
     const {id} = useParams()
-    console.log(id)
+    const [data, setData] = useState()
+
+    useEffect(()=>{
+      skillService.getOneSkill(id).then(res => setData(res.data.data))
+    })
+
+
     const inputs = [
         {
           id: 1,
@@ -86,7 +94,7 @@ const UpdateSkill = () => {
               {inputs.map((input) => (
                 <div className="formInput" key={input.id}>
                   <label>{input.label}</label>
-                  <input type={input.type} placeholder={input.placeholder} onChange={(event)=> onChange(event, input.value)}/>
+                  <input value={data ? data[input.value] : ""} type={input.type} placeholder={input.placeholder} onChange={(event)=> onChange(event, input.value)}/>
                 </div>
               ))}
               <div className="formInput" style={{marginLeft:"-120px"}}>
@@ -99,7 +107,7 @@ const UpdateSkill = () => {
               </div>
               <div className="formInput" style={{marginLeft:"-80px"}}>
                 <label>Active: </label>
-                <input style={{width:"fit-content"}}  type="checkbox" onChange={(event)=>onChange(event, 'active')}/>
+                <input checked={data ? data['active'] : false} style={{width:"fit-content"}}  type="checkbox" onChange={(event)=>onChange(event, 'active')}/>
               </div>
 
               <button type="button" onClick={onSend}>Update</button>

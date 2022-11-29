@@ -33,6 +33,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route element={<MainLayout/>}>
             <Route path={HOME_PATH} element={<Home />} />
+            <Route path="profile" element={< UserPage/>}/>
             <Route path="users">
               <Route index element={<UserList />} />
               <Route path=":id" element={<UserDetail />} />
@@ -40,18 +41,6 @@ function App() {
                 path="new"
                 element={<New inputs={userInputs} title="Add New User" />}
               />
-            </Route>
-            <Route path="products">
-              <Route index element={<List />} />
-              <Route path=":productId" element={<UserPage />} />
-              <Route
-                path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
-              />
-            </Route>
-
-            <Route path="employers">
-              <Route index element={<OrderList />} />
             </Route>
 
             <Route path="company">

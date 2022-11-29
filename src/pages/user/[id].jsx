@@ -2,12 +2,14 @@ import "./single.scss";
 import Chart from "../../components/chart/Chart";
 import { useParams } from "react-router-dom";
 import accountService from "../../services/accountService";
+import { useQuery } from "@tanstack/react-query";
 
 const UserDetail = () => {
   const {id} = useParams()
 
-  // const {data: user, error, isError, isLoading } = useQuery({queryKey: [`user-${id}`], queryFn: accountService}) 
-  console.log(id)
+  const {data: user, error, isError, isLoading } = useQuery({queryKey: [`user-${id}`], queryFn: () => accountService.getAccountById(id)}) 
+  const data = user?.data?.data
+  console.log(data)
   return (
     <div className="single">
       <div className="singleContainer">
@@ -22,10 +24,10 @@ const UserDetail = () => {
                 className="itemImg"
               />
               <div className="details">
-                <h1 className="itemTitle">Jane Doe</h1>
+                <h1 className="itemTitle">{data?.fullname || "Jon Done"}</h1>
                 <div className="detailItem">
                   <span className="itemKey">Email:</span>
-                  <span className="itemValue">janedoe@gmail.com</span>
+                  <span className="itemValue">{data?.email}</span>
                 </div>
                 <div className="detailItem">
                   <span className="itemKey">Phone:</span>
@@ -34,12 +36,8 @@ const UserDetail = () => {
                 <div className="detailItem">
                   <span className="itemKey">Address:</span>
                   <span className="itemValue">
-                    Elton St. 234 Garden Yd. NewYork
+                  {data?.address || "Ho Chi Minh City"}
                   </span>
-                </div>
-                <div className="detailItem">
-                  <span className="itemKey">Country:</span>
-                  <span className="itemValue">USA</span>
                 </div>
               </div>
             </div>

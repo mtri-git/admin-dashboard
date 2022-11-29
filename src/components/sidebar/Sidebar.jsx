@@ -93,10 +93,13 @@ const Sidebar = () => {
             <span>Settings</span>
           </li> */}
           <p className="title">USER</p>
-          <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Profile</span>
-          </li>
+          <NavLink to="profile">
+            <li>
+              <AccountCircleOutlinedIcon className="icon" />
+              <span>Profile</span>
+            </li>
+          </NavLink>
+
           <li onClick={onLogout}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>

@@ -5,12 +5,25 @@ import Widget from "../../components/widget/Widget";
 import Featured from "../../components/featured/Featured";
 import Chart from "../../components/chart/Chart";
 import Table from "../../components/table/Table";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import statisticService from "../../services/statisticService";
 
 const Home = () => {
 
   const navigate = useNavigate()
+  const [ userNumber, setUserNumber] = useState()
+  const [ jobNumber, setJobNumber] = useState()
+  const [ applicationNumber, setApplicationJobNumber] = useState()
+
+  useEffect(()=>{
+      statisticService.getAmountAccount().then(res => {setUserNumber(res.data.data)})
+      statisticService.getJobAmount().then(res => {setJobNumber(res.data.data)})
+      statisticService.getApplicationAmount().then(res => {setApplicationJobNumber(res.data.data)})
+  }, [])
+
+  console.log(userNumber);
+
   useEffect(()=>{
     const token = localStorage.getItem('login')
     if(!token)
@@ -24,10 +37,10 @@ const Home = () => {
       <div className="homeContainer">
         {/* <Navbar /> */}
         <div className="widgets">
-          <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earning" />
-          <Widget type="balance" />
+          <Widget type="user" amount={userNumber} />
+          <Widget type="job" amount={jobNumber}/>
+          <Widget type="application" amount={applicationNumber}/>
+          <Widget type="company" amount='100'/>
         </div>
         <div className="charts">
           <Featured />

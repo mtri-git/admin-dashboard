@@ -1,19 +1,16 @@
 import { DataGrid } from "@mui/x-data-grid";
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import accountService from "../../services/accountService";
 import './UserDatatable.scss'
 
-export default function UserDatatale() {
+export default function UserDatatale({dataRows}) {
+  const [data, setData] = useState(dataRows)
 
-  const {data: users, error, isError, isLoading } = useQuery({queryKey: ['users'], queryFn: accountService.getAllAccount}) 
-  const data = users?.data?.data
-  console.log(data)
-  
-  
+  useEffect(()=>{
+    setData(dataRows)
+  }, [dataRows])
 
   const actionColumn = [
     {
@@ -72,17 +69,19 @@ export default function UserDatatale() {
         </Link>
       </div>
       <div style={{ height: 600, width: '100%' }}>
-        {isLoading ?     
+        {data ?
+         <DataGrid
+         rows={data}
+         columns={columns.concat(actionColumn)}
+         pageSize={10}
+         rowsPerPageOptions={[10]}
+         checkboxSelection
+       />
+       :
           <Box sx={{ display: 'flex', justifyContent: 'center' }}>
             <CircularProgress />
-          </Box> : 
-        <DataGrid
-        rows={data}
-        columns={columns.concat(actionColumn)}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        checkboxSelection
-      />}
+          </Box>
+       }
       
     </div>
     </div>

@@ -5,11 +5,10 @@ import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalance
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 
-const Widget = ({ type }) => {
+const Widget = ({ type, amount }) => {
   let data;
 
   //temporary
-  const amount = 100;
   const diff = 20;
 
   switch (type) {
@@ -29,11 +28,11 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "order":
+    case "job":
       data = {
-        title: "ORDERS",
+        title: "JOBS",
         isMoney: false,
-        link: "View all orders",
+        link: "View all job",
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
@@ -45,11 +44,11 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "earning":
+    case "application":
       data = {
-        title: "EARNINGS",
+        title: "APPLICATION",
         isMoney: true,
-        link: "View net earnings",
+        // link: "View net earnings",
         icon: (
           <MonetizationOnOutlinedIcon
             className="icon"
@@ -58,9 +57,9 @@ const Widget = ({ type }) => {
         ),
       };
       break;
-    case "balance":
+    case "company":
       data = {
-        title: "BALANCE",
+        title: "COMPANY",
         isMoney: true,
         link: "See details",
         icon: (

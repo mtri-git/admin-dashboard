@@ -9,7 +9,7 @@ const api = axios.create(
 axios.interceptors.response.use(function (response) {
     return response;
   }, function (error) {
-    localStorage.clear()
+    
     return Promise.reject(error);
   });
 

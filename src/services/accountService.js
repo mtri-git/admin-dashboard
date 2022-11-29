@@ -22,6 +22,15 @@ const accountService = {
     });
   },
 
+  getAccountById(id) {
+    if (!token) return null;
+    return api.get("/api/admin/get-account-by-id/"+id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+
   createAccount(data) {
     if (!token) return null;
     return api.post("/api/admin/add-account", data,{
