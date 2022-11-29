@@ -99,7 +99,7 @@ const UpdateSkill = () => {
               ))}
               <div className="formInput" style={{marginLeft:"-120px"}}>
                 <label>Type </label>
-                <select style={{width:"fit-content"}}  type="checkbox" onChange={(event)=>onChange(event, 'type')}>
+                <select style={{width:"fit-content"}} value=  type="checkbox" onChange={(event)=>onChange(event, 'type')}>
                   <option value='SERVICE'>Service</option>
                   <option value='SKILL'>Skill</option>
                   <option value='POSITION'>Position</option>

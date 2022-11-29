@@ -19,7 +19,7 @@ const UserDetail = () => {
             <h1 className="title">Information</h1>
             <div className="item">
               <img
-                src={data?.avatar || "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"}
+                src={data?.email || "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
                 alt=""
                 className="itemImg"
               />

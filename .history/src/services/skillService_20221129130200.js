@@ -8,7 +8,7 @@ const skillService = {
     getAllSkill(){
         if(!token)
             return null
-        return api.get('api/admin/get-all-extra-info',
+        return api.get('api/admin/get-extra-info',
         {
         headers: {
             'Authorization': `Bearer ${token}`
@@ -18,7 +18,7 @@ const skillService = {
     getOneSkill(id){
         if(!token)
             return null
-        return api.get('api/admin/get-extra-info/'+id,
+        return api.get('api/admin/get-one-extra-info/'+id,
         {
         headers: {
             'Authorization': `Bearer ${token}`
