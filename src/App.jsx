@@ -21,6 +21,7 @@ import Job from "./pages/job";
 import Companies from "./pages/company";
 import NewCompany from "./pages/company/new";
 import UserDetail from "./pages/user/[id]";
+import Page404 from "./pages/404";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -59,7 +60,7 @@ function App() {
             <Route path="jobs">
               <Route index element={<Job />} />
             </Route>
-
+            <Route path="*" element={<Page404/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
